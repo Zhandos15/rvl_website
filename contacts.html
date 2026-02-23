@@ -10,14 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- ВАЖНО: contacts.html лежит в папке project/ -->
   <link rel="stylesheet" href="../css/style.css">
-<script defer src="../js/rvl.js"></script>
+  <script defer src="../js/rvl.js"></script>
 </head>
 
 <body>
-
-  <!-- Topbar + Header (вставьте ваш общий блок) -->
-   <body>
 
   <!-- Topbar -->
   <div class="topbar">
@@ -50,15 +48,17 @@
   <!-- Header -->
   <header class="header">
     <div class="container header__inner">
-      <a class="brand" href="index.html">
-          <img src="../img/logotipe.png"...><div class="brand__text">
+      <!-- Главная страница в корне, поэтому ../ -->
+      <a class="brand" href="../index.html">
+        <img src="../img/logotipe.png" alt="Логотип" class="brand__logo" />
+        <div class="brand__text">
           <div class="brand__name" data-i18n="brand.name">Республиканская ветеринарная лаборатория</div>
           <div class="brand__sub" data-i18n="brand.sub">Официальный веб-ресурс</div>
         </div>
       </a>
 
       <nav class="nav" id="nav">
-        <a href="index.html" class="nav__link" data-i18n="nav.home">Главная</a>
+        <a href="../index.html" class="nav__link" data-i18n="nav.home">Главная</a>
         <a href="about.html" class="nav__link" data-i18n="nav.about">О лаборатории</a>
         <a href="branches.html" class="nav__link" data-i18n="nav.branches">Структура и филиалы</a>
         <a href="services.html" class="nav__link" data-i18n="nav.services">Услуги</a>
@@ -79,7 +79,7 @@
     <div class="container">
 
       <p class="breadcrumbs">
-        <a href="index.html" data-i18n="nav.home">Главная</a>
+        <a href="../index.html" data-i18n="nav.home">Главная</a>
         <span class="dot">•</span>
         <span data-i18n="nav.contacts">Контакты</span>
       </p>
@@ -149,9 +149,6 @@
               </iframe>
             </div>
 
-        <p class="hint" data-i18n="contacts.map.hint">Для навигации используйте адрес или позвоните в приёмную.</p>
-    </div>
-
             <p class="hint" style="margin-top:10px" data-i18n="contacts.map.hint">
               Для навигации используйте адрес или позвоните в приёмную.
             </p>
@@ -218,7 +215,7 @@
     </div>
   </main>
 
- <!-- Footer -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__grid">
       <div>
@@ -248,11 +245,5 @@
       <span data-i18n="footer.rights">Все права защищены</span>
     </div>
   </footer>
-
 </body>
 </html>
-
-
-
-
-
