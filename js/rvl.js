@@ -585,7 +585,7 @@ window.newsData = {
     cat: "official",
     dateISO: "2026-02-01",
     dateText: "01.02.2026",
-    image: "../assets/img/renew.png",
+    image: "img/renew.png",
     title: {
       ru: "Обновление графика приёма заявок",
       kz: "Өтінім қабылдау кестесінің жаңартылуы",
@@ -635,7 +635,7 @@ window.newsData = {
     cat: "announce",
     dateISO: "2026-01-20",
     dateText: "20.01.2026",
-    image: "../assets/img/website.png",
+    image: "img/website.png",
     title: {
       ru: "Объявление о технических работах",
       kz: "Техникалық жұмыстар туралы хабарландыру",
@@ -685,7 +685,7 @@ window.newsData = {
     cat: "press",
     dateISO: "2025-12-10",
     dateText: "10.12.2025",
-    image: "../assets/img/newmethod.png",
+    image: "img/newmethod.png",
     title: {
       ru: "Внедрение новых методов диагностики",
       kz: "Диагностиканың жаңа әдістерін енгізу",
@@ -1402,7 +1402,7 @@ const servicesData = [
   {
     id: "hema",
     cats: ["hema", "lab"],
-    img: "../assets/img/gematology.png",
+    img: "img/gematology.png",
     tags: ["hema", "lab"],
     title: {
       ru: "Гематологические исследования",
@@ -1419,7 +1419,7 @@ const servicesData = [
   {
     id: "bio",
     cats: ["bio", "lab"],
-    img: "../assets/img/biochemia.png",
+    img: "img/biochemia.png",
     tags: ["bio", "lab"],
     title: {
       ru: "Биохимические исследования",
@@ -1436,7 +1436,7 @@ const servicesData = [
   {
     id: "pcr",
     cats: ["pcr", "lab"],
-    img: "../assets/img/PCR.png",
+    img: "img/PCR.png",
     tags: ["pcr", "lab"],
     title: {
       ru: "ПЦР диагностика",
@@ -1453,7 +1453,7 @@ const servicesData = [
   {
     id: "micro",
     cats: ["micro", "lab"],
-    img: "../assets/img/microbio.png",
+    img: "img/microbio.png",
     tags: ["micro", "lab"],
     title: {
       ru: "Микробиологические исследования",
@@ -1470,7 +1470,7 @@ const servicesData = [
   {
     id: "sero",
     cats: ["lab"],
-    img: "../assets/img/sero.png",
+    img: "img/sero.png",
     tags: ["lab"],
     title: {
       ru: "Серологические исследования",
@@ -1487,7 +1487,7 @@ const servicesData = [
   {
     id: "support",
     cats: ["consult"],
-    img: "../assets/img/method.png",
+    img: "img/method.png",
     tags: ["consult"],
     title: {
       ru: "Методическое сопровождение",
@@ -1831,4 +1831,5 @@ window.addEventListener("langchange", () => {
   if (window.applyNewsFilters) {
     window.applyNewsFilters();
   }
+
 });
