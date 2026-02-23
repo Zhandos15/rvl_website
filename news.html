@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="news.pageTitle">Новости — Республиканская ветеринарная лаборатория</title>
+  <meta name="description" content="Новости и объявления." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script defer src="../assets/js/rvl.js"></script>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="badge" data-i18n="topbar.badge">Гос. учреждение</span>
+        <a class="topbar__link" href="tel:+77776735206">8 777 673 52 06</a>
+        <span class="dot">•</span>
+        <a class="topbar__link" href="tel:+77064187050">8 706 418 70 50</a>
+      </div>
+
+      <div class="topbar__right">
+        <a class="topbar__link" href="https://adilet.zan.kz/rus" target="_blank" rel="noopener" data-i18n="topbar.adilet">Adilet</a>
+        <span class="dot">•</span>
+        <a class="topbar__link" href="https://goszakup.gov.kz/" target="_blank" rel="noopener" data-i18n="topbar.goszakup">Госзакуп</a>
+
+        <div class="lang">
+          <button class="lang__btn" data-lang-btn="ru" type="button">RU</button>
+          <button class="lang__btn" data-lang-btn="kz" type="button">KZ</button>
+          <button class="lang__btn" data-lang-btn="en" type="button">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <img src="../assets/img/logotipe.png" alt="Логотип" class="brand__logo" />
+        <div class="brand__text">
+          <div class="brand__name" data-i18n="brand.name">Республиканская ветеринарная лаборатория</div>
+          <div class="brand__sub" data-i18n="brand.sub">Официальный веб-ресурс</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav__link" data-i18n="nav.home">Главная</a>
+        <a href="index.html#about" class="nav__link" data-i18n="nav.about">О лаборатории</a>
+        <a href="index.html#branches" class="nav__link" data-i18n="nav.branches">Структура и филиалы</a>
+        <a href="services.html" class="nav__link" data-i18n="nav.services">Услуги</a>
+        <a href="index.html#training" class="nav__link" data-i18n="nav.training">Учебно-методический центр</a>
+        <a href="index.html#laws" class="nav__link" data-i18n="nav.laws">НПА</a>
+        <a href="news.html" class="nav__link nav__link--gold" data-i18n="nav.news">Новости</a>
+        <a href="contacts.html" class="nav__link" data-i18n="nav.contacts">Контакты</a>
+        <a href="proposals.html" class="nav__link" data-i18n="nav.proposals">Предложения</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="menu" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page -->
+  <main class="page">
+    <div class="container">
+
+      <p class="breadcrumbs">
+        <a href="index.html" data-i18n="nav.home">Главная</a>
+        <span class="dot">•</span>
+        <span data-i18n="nav.news">Новости</span>
+      </p>
+
+      <h1 class="page__title" data-i18n="news.title">Новости</h1>
+      <p class="page__lead" data-i18n="news.lead">Официальные новости, объявления и пресс-релизы.</p>
+
+      <!-- Controls -->
+      <section class="services-controls" aria-label="Фильтры новостей">
+        <div class="services-controls__row">
+          <div class="search">
+            <input id="newsSearch"
+                   type="search"
+                   placeholder="Поиск по новостям..."
+                   data-i18n-placeholder="news.search.placeholder"
+                   aria-label="Поиск по новостям">
+          </div>
+
+          <div class="select">
+            <label class="select__label" data-i18n="news.category.label" for="newsCategory">Категория</label>
+            <select id="newsCategory">
+              <option value="all" data-i18n="news.cat.all">Все</option>
+              <option value="official" data-i18n="news.cat.official">Официально</option>
+              <option value="announce" data-i18n="news.cat.announce">Объявления</option>
+              <option value="press" data-i18n="news.cat.press">Пресс-релизы</option>
+            </select>
+          </div>
+
+          <button class="btn btn--outline" id="newsClear" type="button" data-i18n="news.reset">Сбросить</button>
+        </div>
+
+        <div class="chips" id="newsChips">
+          <button class="chip is-active" type="button" data-chip="all" data-i18n="news.cat.all">Все</button>
+          <button class="chip" type="button" data-chip="official" data-i18n="news.cat.official">Официально</button>
+          <button class="chip" type="button" data-chip="announce" data-i18n="news.cat.announce">Объявления</button>
+          <button class="chip" type="button" data-chip="press" data-i18n="news.cat.press">Пресс-релизы</button>
+        </div>
+      </section>
+
+      <!-- News list -->
+      <section class="news-grid" id="newsGrid">
+
+        <!-- Пример новости 1 -->
+        <article class="news-card" data-cat="official">
+          <div class="news-card__meta">
+            <span class="tag" data-i18n="news.tag.official">Официально</span>
+            <time class="news-card__date" datetime="2026-02-01">01.02.2026</time>
+          </div>
+          <h3 class="news-card__title" data-i18n="news.item1.title">Обновление графика приёма заявок</h3>
+          <p class="news-card__desc" data-i18n="news.item1.desc">Опубликован новый порядок обработки заявок и сроки ответа для заявителей.</p>
+          <a class="link" href="news-item.html?id=1" data-i18n="news.readMore">Читать подробнее →</a>
+        </article>
+
+        <!-- Пример новости 2 -->
+        <article class="news-card" data-cat="announce">
+          <div class="news-card__meta">
+            <span class="tag" data-i18n="news.tag.announce">Объявление</span>
+            <time class="news-card__date" datetime="2026-01-20">20.01.2026</time>
+          </div>
+          <h3 class="news-card__title" data-i18n="news.item2.title">Объявление о технических работах</h3>
+          <p class="news-card__desc" data-i18n="news.item2.desc">Возможны кратковременные перебои в работе сайта в связи с обновлением инфраструктуры.</p>
+          <a class="link" href="news-item.html?id=2" data-i18n="news.readMore">Читать подробнее →</a>
+        </article>
+
+        <!-- Пример новости 3 -->
+        <article class="news-card" data-cat="press">
+          <div class="news-card__meta">
+            <span class="tag" data-i18n="news.tag.press">Пресс-релиз</span>
+            <time class="news-card__date" datetime="2025-12-10">10.12.2025</time>
+          </div>
+          <h3 class="news-card__title" data-i18n="news.item3.title">Внедрение новых методов диагностики</h3>
+          <p class="news-card__desc" data-i18n="news.item3.desc">Лаборатория расширяет перечень исследований, повышая точность и скорость результатов.</p>
+          <a class="link" href="news-item.html?id=3" data-i18n="news.readMore">Читать подробнее →</a>
+        </article>
+
+      </section>
+
+      <div class="empty" id="newsEmpty" hidden>
+        <div class="empty__title" data-i18n="news.empty.title">Ничего не найдено</div>
+        <div class="empty__desc" data-i18n="news.empty.desc">Попробуйте изменить запрос или выбрать другую категорию.</div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <div class="footer__title" data-i18n="footer.title">Официальный сайт</div>
+        <div class="footer__text" data-i18n="footer.text">...</div>
+      </div>
+      <div>
+        <div class="footer__title" data-i18n="footer.links">Ссылки</div>
+        <a class="footer__link" href="services.html" data-i18n="nav.services">Услуги</a>
+        <a class="footer__link" href="news.html" data-i18n="nav.news">Новости</a>
+        <a class="footer__link" href="proposals.html" data-i18n="nav.proposals">Предложения</a>
+      </div>
+      <div>
+        <div class="footer__title" data-i18n="footer.external">Внешние ресурсы</div>
+        <a class="footer__link" href="https://adilet.zan.kz/rus" target="_blank" rel="noopener">Adilet</a>
+        <a class="footer__link" href="https://goszakup.gov.kz/" target="_blank" rel="noopener">Goszakup</a>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span></span>
+      <span class="dot">•</span>
+      <span data-i18n="footer.rights">Все права защищены</span>
+    </div>
+  </footer>
+
+</body>
+</html>

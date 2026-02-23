@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Новость — Республиканская ветеринарная лаборатория</title>
+  <meta name="description" content="" />
+
+  <!-- SEO OpenGraph -->
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script defer src="../assets/js/rvl.js"></script>
+</head>
+
+<body>
+
+<main class="page">
+  <div class="container">
+
+    <!-- Хлебные крошки с поддержкой языков -->
+    <p class="breadcrumbs">
+      <a href="index.html" data-i18n="nav.home">Главная</a>
+      <span class="dot">•</span>
+      <a href="news.html" data-i18n="nav.news">Новости</a>
+      <span class="dot">•</span>
+      <span id="newsCrumb">Новость</span>
+    </p>
+
+    <h1 class="page__title news-full__title" id="newsTitle">Новость</h1>
+
+    <!-- Мета-информация новости: дата и категория -->
+    <div class="news-full__meta" id="newsMeta">
+      <span class="tag" id="newsCategoryTag"></span>
+      <time id="newsDate"></time>
+    </div>
+
+    <!-- Изображение новости (опционально) -->
+    <div class="news-full__image-wrapper" id="newsImageWrapper" style="display: none;">
+      <img id="newsImage" class="news-full__image" src="" alt="">
+    </div>
+
+    <!-- Полный текст новости -->
+    <article class="news-full__content" id="newsBody"></article>
+
+    <!-- Блок "Поделиться" с поддержкой языков -->
+    <div class="news-full__share">
+      <span data-i18n="news.share">Поделиться:</span>
+      <button class="share-btn" data-share="facebook" data-i18n="news.share.fb">Facebook</button>
+      <button class="share-btn" data-share="telegram" data-i18n="news.share.tg">Telegram</button>
+      <button class="share-btn" data-share="copy" data-i18n="news.share.copy">Скопировать ссылку</button>
+    </div>
+
+    <!-- Ссылка назад к списку новостей -->
+    <div style="margin-top:20px;">
+      <a class="link" href="news.html" data-i18n="news.back">← Назад к новостям</a>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  (function() {
+    "use strict";
+
+    // ----- Вспомогательные функции -----
+    function getCurrentLang() {
+      return document.documentElement.dataset.lang || localStorage.getItem("lang") || "ru";
+    }
+
+    function getTranslation(key, lang) {
+      if (window.translations && window.translations[lang] && window.translations[lang][key]) {
+        return window.translations[lang][key];
+      }
+      return null;
+    }
+
+    function getCategoryLabel(cat, lang) {
+      const labels = {
+        official: { ru: "Официально", kz: "Ресми", en: "Official" },
+        announce: { ru: "Объявление", kz: "Хабарландыру", en: "Announcement" },
+        press: { ru: "Пресс-релиз", kz: "Пресс-релиз", en: "Press release" }
+      };
+      return labels[cat]?.[lang] || labels[cat]?.ru || cat;
+    }
+
+    function setMeta(name, content) {
+      let el = document.querySelector(`meta[name="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("name", name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content || "");
+    }
+
+    function setOg(property, content) {
+      let el = document.querySelector(`meta[property="${property}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute("property", property);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content || "");
+    }
+
+    // ----- Основная логика -----
+    function renderNewsItem() {
+      const params = new URLSearchParams(location.search);
+      const id = params.get("id");
+      const lang = getCurrentLang();
+      
+      // Проверяем наличие данных
+      if (!window.newsData) {
+        console.error("newsData not found!");
+        return;
+      }
+
+      const news = window.newsData[id];
+      
+      // Элементы DOM
+      const titleEl = document.getElementById("newsTitle");
+      const crumbEl = document.getElementById("newsCrumb");
+      const metaEl = document.getElementById("newsMeta");
+      const bodyEl = document.getElementById("newsBody");
+      const imgEl = document.getElementById("newsImage");
+      const imgWrapper = document.getElementById("newsImageWrapper");
+      const categoryTag = document.getElementById("newsCategoryTag");
+      const dateEl = document.getElementById("newsDate");
+
+      // Если новость не найдена
+      if (!news) {
+        const notFoundTitle = getTranslation("news.notFound", lang) || 
+                             (lang === "kz" ? "Жаңалық табылмады" : 
+                              lang === "en" ? "News not found" : "Новость не найдена");
+        
+        const notFoundDesc = getTranslation("news.notFoundDesc", lang) || 
+                            (lang === "kz" ? "Сұралған жаңалық жоқ." : 
+                             lang === "en" ? "The requested news item does not exist." : 
+                             "Запрашиваемая новость отсутствует.");
+        
+        document.title = notFoundTitle + " — Республиканская ветеринарная лаборатория";
+        if (titleEl) titleEl.textContent = notFoundTitle;
+        if (crumbEl) crumbEl.textContent = notFoundTitle;
+        if (bodyEl) bodyEl.innerHTML = `<p>${notFoundDesc}</p>`;
+        
+        // Скрываем мета-информацию и изображение
+        if (metaEl) metaEl.style.display = "none";
+        if (imgWrapper) imgWrapper.style.display = "none";
+        return;
+      }
+
+      // --- Новость найдена ---
+      
+      // 1. Заголовок
+      const title = news.title[lang] || news.title.ru;
+      document.title = title + " — Республиканская ветеринарная лаборатория";
+      if (titleEl) titleEl.textContent = title;
+      if (crumbEl) crumbEl.textContent = title;
+
+      // 2. Мета-информация (дата и категория)
+      if (metaEl) metaEl.style.display = "block";
+      
+      // Категория
+      if (categoryTag) {
+        categoryTag.textContent = getCategoryLabel(news.cat, lang);
+        categoryTag.className = `tag news-card__tag news-card__tag--${news.cat}`;
+      }
+      
+      // Дата
+      if (dateEl) {
+        dateEl.setAttribute("datetime", news.dateISO || "");
+        dateEl.textContent = news.dateText || "";
+      }
+
+      // 3. Изображение
+      if (news.image && imgEl && imgWrapper) {
+        imgEl.src = news.image;
+        imgEl.alt = title;
+        imgWrapper.style.display = "block";
+      } else if (imgWrapper) {
+        imgWrapper.style.display = "none";
+      }
+
+      // 4. Полный текст новости
+      if (bodyEl) {
+        bodyEl.innerHTML = news.body[lang] || news.body.ru;
+      }
+
+      // 5. SEO мета-теги
+      const description = news.desc[lang] || news.desc.ru;
+      setMeta("description", description);
+      setOg("og:title", title);
+      setOg("og:description", description);
+      setOg("og:type", "article");
+      setOg("og:image", news.image || "");
+      setOg("og:url", window.location.href);
+      setMeta("twitter:card", "summary_large_image");
+
+      // 6. Обновляем переводы на странице (для хлебных крошек и кнопок)
+      updateStaticTranslations(lang);
+    }
+
+    // Обновление статических переводов на странице
+    function updateStaticTranslations(lang) {
+      if (!window.translations) return;
+      
+      // Элементы с data-i18n
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        const value = getTranslation(key, lang);
+        if (value) el.textContent = value;
+      });
+    }
+
+    // ----- Инициализация при загрузке -----
+    renderNewsItem();
+
+    // ----- Обработчики для кнопок "Поделиться" -----
+    function initShareButtons() {
+      document.querySelectorAll(".share-btn").forEach(btn => {
+        // Удаляем старые обработчики, чтобы не было дублирования
+        btn.removeEventListener("click", handleShareClick);
+        btn.addEventListener("click", handleShareClick);
+      });
+    }
+
+    function handleShareClick(e) {
+      const btn = e.currentTarget;
+      const url = window.location.href;
+      const title = document.title;
+      const lang = getCurrentLang();
+
+      if (btn.dataset.share === "facebook") {
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+      } else if (btn.dataset.share === "telegram") {
+        window.open(`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`);
+      } else if (btn.dataset.share === "copy") {
+        navigator.clipboard.writeText(url).then(() => {
+          const message = getTranslation("news.linkCopied", lang) || 
+                         (lang === "kz" ? "Сілтеме көшірілді!" : 
+                          lang === "en" ? "Link copied!" : "Ссылка скопирована!");
+          alert(message);
+        }).catch(() => {
+          // Fallback
+          const textarea = document.createElement("textarea");
+          textarea.value = url;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+          
+          const message = getTranslation("news.linkCopied", lang) || 
+                         (lang === "kz" ? "Сілтеме көшірілді!" : 
+                          lang === "en" ? "Link copied!" : "Ссылка скопирована!");
+          alert(message);
+        });
+      }
+    }
+
+    // Инициализируем кнопки поделиться
+    initShareButtons();
+
+    // ----- Обработчик смены языка -----
+    window.addEventListener("langchange", function(e) {
+      // Перерисовываем новость с новым языком
+      renderNewsItem();
+      // Обновляем кнопки поделиться
+      initShareButtons();
+    });
+
+    // Перехватываем клики по кнопкам языка, чтобы обновить страницу
+    document.addEventListener("click", function(e) {
+      const langBtn = e.target.closest("[data-lang-btn]");
+      if (langBtn) {
+        const newLang = langBtn.dataset.langBtn;
+        // Сохраняем язык
+        localStorage.setItem("lang", newLang);
+        document.documentElement.dataset.lang = newLang;
+        document.documentElement.setAttribute("lang", newLang === "kz" ? "kk" : newLang);
+        
+        // Диспатчим событие
+        window.dispatchEvent(new CustomEvent("langchange", { detail: { lang: newLang } }));
+        
+        // Предотвращаем стандартное поведение из rvl.js, 
+        // чтобы избежать конфликтов и перезагрузки страницы
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true); // Используем capturing, чтобы перехватить до обработчика в rvl.js
+
+  })();
+</script>
+
+<!-- Добавляем недостающие переводы в translations объект (будут добавлены в rvl.js, 
+     но на всякий случай определяем здесь, если скрипт не загрузился) -->
+<script>
+  if (!window.translations) window.translations = { ru: {}, kz: {}, en: {} };
+  
+  // Добавляем недостающие ключи для страницы новости
+  const newsPageTranslations = {
+    ru: {
+      "news.share": "Поделиться:",
+      "news.share.fb": "Facebook",
+      "news.share.tg": "Telegram",
+      "news.share.copy": "Скопировать ссылку",
+      "news.back": "← Назад к новостям",
+      "news.notFound": "Новость не найдена",
+      "news.notFoundDesc": "Запрашиваемая новость отсутствует.",
+      "news.linkCopied": "Ссылка скопирована!"
+    },
+    kz: {
+      "news.share": "Бөлісу:",
+      "news.share.fb": "Facebook",
+      "news.share.tg": "Telegram",
+      "news.share.copy": "Сілтемені көшіру",
+      "news.back": "← Жаңалықтарға оралу",
+      "news.notFound": "Жаңалық табылмады",
+      "news.notFoundDesc": "Сұралған жаңалық жоқ.",
+      "news.linkCopied": "Сілтеме көшірілді!"
+    },
+    en: {
+      "news.share": "Share:",
+      "news.share.fb": "Facebook",
+      "news.share.tg": "Telegram",
+      "news.share.copy": "Copy link",
+      "news.back": "← Back to news",
+      "news.notFound": "News not found",
+      "news.notFoundDesc": "The requested news item does not exist.",
+      "news.linkCopied": "Link copied!"
+    }
+  };
+
+  // Добавляем переводы в глобальный объект
+  for (const lang in newsPageTranslations) {
+    if (!window.translations[lang]) window.translations[lang] = {};
+    Object.assign(window.translations[lang], newsPageTranslations[lang]);
+  }
+</script>
+
+</body>
+</html>

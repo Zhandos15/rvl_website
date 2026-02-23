@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ru" data-lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Услуги — Республиканская ветеринарная лаборатория</title>
+  <meta name="description" content="Перечень услуг и направлений деятельности лаборатории." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script defer src="../assets/js/rvl.js"></script>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="badge" data-i18n="topbar.badge">Гос. учреждение</span>
+        <a class="topbar__link" href="tel:+77776735206">8 777 673 52 06</a>
+        <span class="dot">•</span>
+        <a class="topbar__link" href="tel:+77064187050">8 706 418 70 50</a>
+      </div>
+
+      <div class="topbar__right">
+        <a class="topbar__link" href="https://adilet.zan.kz/rus" target="_blank" rel="noopener" data-i18n="topbar.adilet">Adilet</a>
+        <span class="dot">•</span>
+        <a class="topbar__link" href="https://goszakup.gov.kz/" target="_blank" rel="noopener" data-i18n="topbar.goszakup">Госзакуп</a>
+
+        <div class="lang">
+          <button class="lang__btn" data-lang-btn="ru" type="button">RU</button>
+          <button class="lang__btn" data-lang-btn="kz" type="button">KZ</button>
+          <button class="lang__btn" data-lang-btn="en" type="button">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <img src="../assets/img/logotipe.png" alt="Логотип" class="brand__logo" />
+        <div class="brand__text">
+          <div class="brand__name" data-i18n="brand.name">Республиканская ветеринарная лаборатория</div>
+          <div class="brand__sub" data-i18n="brand.sub">Официальный веб-ресурс</div>
+        </div>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav__link" data-i18n="nav.home">Главная</a>
+        <a href="index.html#about" class="nav__link" data-i18n="nav.about">О лаборатории</a>
+        <a href="index.html#branches" class="nav__link" data-i18n="nav.branches">Структура и филиалы</a>
+        <a href="services.html" class="nav__link nav__link--gold" data-i18n="nav.services">Услуги</a>
+        <a href="index.html#training" class="nav__link" data-i18n="nav.training">Учебно-методический центр</a>
+        <a href="index.html#laws" class="nav__link" data-i18n="nav.laws">НПА</a>
+        <a href="news.html" class="nav__link" data-i18n="nav.news">Новости</a>
+        <a href="contacts.html" class="nav__link" data-i18n="nav.contacts">Контакты</a>
+        <a href="proposals.html" class="nav__link" data-i18n="nav.proposals">Предложения</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="menu" type="button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page -->
+  <main class="page">
+    <div class="container">
+
+      <p class="breadcrumbs">
+        <a href="index.html" data-i18n="nav.home">Главная</a>
+        <span class="dot">•</span>
+        <span data-i18n="nav.services">Услуги</span>
+      </p>
+
+      <h1 class="page__title" data-i18n="services.title">Услуги и направления</h1>
+
+      <!-- Controls -->
+    <section class="services-controls services-section" aria-label="Фильтры услуг">
+  <div class="services-controls__row">
+    <div class="search">
+      <input id="serviceSearch"
+             type="search"
+             placeholder="Поиск услуги..."
+             data-i18n-placeholder="services.filter.search"
+             aria-label="Поиск услуги">
+    </div>
+
+    <div class="select">
+      <label class="select__label" for="serviceCategory" data-i18n="services.filter.category">Категория</label>
+      <select id="serviceCategory">
+        <option value="all">Все</option>
+        <option value="lab">Лаборатория</option>
+        <option value="pcr">ПЦР</option>
+        <option value="micro">Микробиология</option>
+        <option value="bio">Биохимия</option>
+        <option value="hema">Гематология</option>
+        <option value="consult">Сопровождение</option>
+      </select>
+    </div>
+
+    <button class="btn btn--outline" id="serviceReset" type="button" data-i18n="services.filter.reset">
+      Сбросить
+    </button>
+  </div>
+
+  <div class="chips" id="serviceChips">
+    <button class="chip services-chip is-active" type="button" data-filter="all" data-i18n="services.filter.all">Все</button>
+    <button class="chip services-chip" type="button" data-filter="lab" data-i18n="services.filter.lab">Лаборатория</button>
+    <button class="chip services-chip" type="button" data-filter="pcr" data-i18n="services.filter.pcr">ПЦР</button>
+    <button class="chip services-chip" type="button" data-filter="micro" data-i18n="services.filter.micro">Микробиология</button>
+    <button class="chip services-chip" type="button" data-filter="bio" data-i18n="services.filter.bio">Биохимия</button>
+    <button class="chip services-chip" type="button" data-filter="hema" data-i18n="services.filter.hema">Гематология</button>
+    <button class="chip services-chip" type="button" data-filter="consult" data-i18n="services.filter.consult">Сопровождение</button>
+  </div>
+</section>
+
+      <!-- Services Grid -->
+      <section class="services-grid" id="servicesGrid">
+
+        <!-- Карточки: меняйте текст и картинки, категории в data-cat -->
+        <article class="service-card" data-cat="hema lab">
+          <div class="service-card__img" style="background-image:url('../assets/img/gematology.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Гематологические исследования</h3>
+            <p class="service-card__desc">Исследования крови животных: основные показатели, оценка состояния организма.</p>
+            <div class="service-card__meta">
+              <span class="tag">Гематология</span><span class="tag">Лаборатория</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Запросить услугу</a>
+          </div>
+        </article>
+
+        <article class="service-card" data-cat="bio lab">
+          <div class="service-card__img" style="background-image:url('../assets/img/biochemia.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Биохимические исследования</h3>
+            <p class="service-card__desc">Показатели биохимии: ферменты, белки, электролиты и другие параметры.</p>
+            <div class="service-card__meta">
+              <span class="tag">Биохимия</span><span class="tag">Лаборатория</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Запросить услугу</a>
+          </div>
+        </article>
+
+        <article class="service-card" data-cat="pcr lab">
+          <div class="service-card__img" style="background-image:url('../assets/img/PCR.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">ПЦР диагностика</h3>
+            <p class="service-card__desc">Молекулярная диагностика инфекций и патогенов с высокой точностью.</p>
+            <div class="service-card__meta">
+              <span class="tag">ПЦР</span><span class="tag">Лаборатория</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Запросить услугу</a>
+          </div>
+        </article>
+
+        <article class="service-card" data-cat="micro lab">
+          <div class="service-card__img" style="background-image:url('../assets/img/microbio.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Микробиологические исследования</h3>
+            <p class="service-card__desc">Выделение культур, идентификация, тестирование чувствительности к препаратам.</p>
+            <div class="service-card__meta">
+              <span class="tag">Микробиология</span><span class="tag">Лаборатория</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Запросить услугу</a>
+          </div>
+        </article>
+
+        <article class="service-card" data-cat="lab">
+          <div class="service-card__img" style="background-image:url('../assets/img/sero.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Серологические исследования</h3>
+            <p class="service-card__desc">Оценка иммунного ответа, выявление антител, мониторинг заболеваний.</p>
+            <div class="service-card__meta">
+              <span class="tag">Лаборатория</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Запросить услугу</a>
+          </div>
+        </article>
+
+        <article class="service-card" data-cat="consult">
+          <div class="service-card__img" style="background-image:url('../assets/img/method.png')"></div>
+          <div class="service-card__body">
+            <h3 class="service-card__title">Методическое сопровождение</h3>
+            <p class="service-card__desc">Консультации, разъяснения, методические материалы и обучение.</p>
+            <div class="service-card__meta">
+              <span class="tag">Сопровождение</span>
+            </div>
+            <a class="btn btn--primary service-card__btn" href="contacts.html">Связаться</a>
+          </div>
+        </article>
+      </section>
+
+      <div class="empty" id="emptyState" hidden>
+  <div class="empty__title" data-i18n="services.empty.title">Ничего не найдено</div>
+  <div class="empty__desc" data-i18n="services.empty.desc">Попробуйте изменить запрос или выбрать другую категорию.</div>
+    </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <div class="footer__title" data-i18n="footer.title">Официальный сайт</div>
+        <div class="footer__text" data-i18n="footer.text">
+          Ветеринарная лаборатория. Адаптивный дизайн, 3 языка, SEO-дружественная структура.
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__title" data-i18n="footer.links">Ссылки</div>
+        <a class="footer__link" href="services.html" data-i18n="nav.services">Услуги</a>
+        <a class="footer__link" href="news.html" data-i18n="nav.news">Новости</a>
+        <a class="footer__link" href="proposals.html" data-i18n="nav.proposals">Предложения конкурсантов</a>
+      </div>
+
+      <div>
+        <div class="footer__title" data-i18n="footer.external">Внешние ресурсы</div>
+        <a class="footer__link" href="https://adilet.zan.kz/rus" target="_blank" rel="noopener">Adilet</a>
+        <a class="footer__link" href="https://goszakup.gov.kz/" target="_blank" rel="noopener">Goszakup</a>
+      </div>
+    </div>
+
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span></span>
+      <span class="dot">•</span>
+      <span data-i18n="footer.rights">Все права защищены</span>
+    </div>
+  </footer>
+</body>
+</html>
